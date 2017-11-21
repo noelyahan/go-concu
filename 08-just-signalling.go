@@ -22,22 +22,34 @@ func main() {
 	}()
 
 	// all these methods will be notify when the channel is close
-	test1()
-	test2()
-	test3()
+	go test1()
+	go test2()
+	go test3()
+
+	var input string
+	fmt.Scanln(&input)
+}
+
+func loop(msg string) {
+	for i := 0; i < 5; i++ {
+		fmt.Println(msg, i)
+	}
 }
 
 func test1() {
 	<-ch
 	fmt.Println("Test 1 got the signal")
+	loop("test1")
 }
 
 func test2() {
 	<-ch
 	fmt.Println("Test 2 got the signal")
+	loop("test2")
 }
 
 func test3() {
 	<-ch
 	fmt.Println("Test 3 got the signal")
+	loop("test3")
 }
